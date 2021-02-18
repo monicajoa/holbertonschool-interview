@@ -13,32 +13,15 @@ def minOperations(n):
     Returns:
         [n]: [number of operations]
     """
-    char_counter = 1
-    op_counter = 0
-    clippboard = 0
+    char_counter = 2  # Character Counter, initializes with "HH" two Characters
+    op_counter = 2    # Operations Counter, Copy and paste to have 2 Characters = Two Operations
+    clippboard = 1    # Clippboard, number of characters currently copied
     if n <= 1:
         return 0
     while char_counter < n:
-        if char_counter == 1:  # Caracter Actual
-            op_counter += 2  # Copy all and Paste Ops
-            clippboard = 1  # Clippboards with 1 Char
-            char_counter += clippboard  # Increment the chars
-        else:
-            if n % 3 == 0 and char_counter >= 3:
-                op_counter += 1
-                char_counter += clippboard
-            if n % 3 == 0 and char_counter < 3:
-                op_counter += 1
-                char_counter += clippboard
-                op_counter += 1
-                clippboard = char_counter
-            if n % 3 != 0:
-                if n % 2 == 0 and char_counter > 2:
-                    op_counter += 1
-                    char_counter += clippboard
-                if n % 2 == 0 and char_counter == 2:
-                    op_counter += 1
-                    clippboard = char_counter
-                    op_counter += 1
-                    char_counter += clippboard
+        if n % char_counter == 0:
+            clippboard = char_counter
+            op_counter += 1
+        char_counter += clippboard
+        op_counter += 1
     return op_counter
