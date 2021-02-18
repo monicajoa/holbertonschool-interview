@@ -14,8 +14,8 @@ def minOperations(n):
         [n]: [number of operations]
     """
     char_counter = 2  # Character Counter, initializes with "HH" two Characters
-    op_counter = 2    # Operations Counter, Copy and paste to have 2 Characters = Two Operations
-    clippboard = 1    # Clippboard, number of characters currently copied
+    op_counter = 2   # Operations Counter, Copy & paste (have 2 Chars) = 2 op
+    clippboard = 1   # Clippboard, number of characters currently copied
     if n <= 1:
         return 0
     while char_counter < n:
