@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
- Module that holds a funtion
- that validates UTF-8 encoding
+Module that holds a funtion
+that validates UTF-8 encoding
 """
 
 
@@ -13,23 +13,20 @@ def validUTF8(data):
     Returns:
         [Bool]: True if is valid UTF-8 otherwise False
     """
-    cnt = 0
-    for byte in data:
-        if 128 <= byte <= 191:
-            if cnt == 0:
-                return False
-            cnt -= 1
-        else:
-            if cnt:
-                return False
-            if byte < 128:
+    bytes = 0
+    for decimal in data:
+        bin_num = format(decimal, '#010b')[-8:]
+        if bytes == 0:
+            for bit in bin_num:
+                if bit == '0':
+                    break
+                bytes += 1
+            if bytes == 0:
                 continue
-            elif byte < 224:
-                cnt = 1
-            elif byte < 240:
-                cnt = 2
-            elif byte < 248:
-                cnt = 3
-            else:
+            if bytes == 1 or bytes > 4:
                 return False
-    return cnt == 0
+        else:
+            if not (bin_num[0] == '1' and bin_num[1] == '0'):
+                return False
+        bytes -= 1
+    return bytes == 0
