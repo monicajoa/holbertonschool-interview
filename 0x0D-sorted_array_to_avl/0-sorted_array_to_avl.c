@@ -10,12 +10,12 @@
 
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
-	avl_t *head = NULL;
+	avl_t *head;
 
-	if (array == NULL || size == 0)
+	if (!array || !size)
 		return (NULL);
 
-	head = add_node(array, size - 1, 0, NULL);
+	head = add_node(array, 0, size - 1, NULL);
 	return (head);
 }
 
@@ -40,6 +40,11 @@ avl_t *create_new_node(avl_t *parent, size_t n)
 	node->right = NULL;
 	node->parent = parent;
 
+	if (parent != NULL)
+		node->parent = parent;
+	else
+		node->parent = NULL;
+
 	return (node);
 }
 
@@ -54,10 +59,11 @@ avl_t *create_new_node(avl_t *parent, size_t n)
  * Return: Pointer to the node
  */
 
-avl_t *add_node(avl_t *parent, int *array, size_t idx_left, size_t idx_right)
+avl_t *add_node(int *array, size_t idx_left, size_t idx_right,
+		avl_t *parent)
 {
-	size_t middle;
 	avl_t *node;
+	size_t middle;
 
 	if (idx_left > idx_right)
 		return (NULL);
@@ -68,7 +74,7 @@ avl_t *add_node(avl_t *parent, int *array, size_t idx_left, size_t idx_right)
 		return (NULL);
 
 	if (middle != idx_left)
-		node->left = add_node(array, middle - 1, idx_left, node);
+		node->left = add_node(array, idx_left, middle - 1, node);
 
 	if (middle != idx_right)
 		node->right = add_node(array, middle + 1, idx_right, node);
