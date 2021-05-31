@@ -10,6 +10,8 @@ def rain(walls):
     distance = 0
     height = 0
 
+    if len(walls) == 0:
+        return 0
     for index in walls:
         if index == 0 and height > 0:
             distance += 1
