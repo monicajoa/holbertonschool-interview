@@ -6,6 +6,14 @@
 
 
 def rain(walls):
+    """ Calculate how much water will be retained after it rains
+
+    Args:
+        walls: list of non-negative integers
+
+    Returns:
+        Integer indicating total amount of rainwater retained
+    """
     water_limit = 0
     distance = 0
     height = 0
