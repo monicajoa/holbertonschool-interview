@@ -14,19 +14,18 @@ def rain(walls):
     Returns:
         Integer indicating total amount of rainwater retained
     """
-    water_limit = 0
-    distance = 0
-    height = 0
 
-    if len(walls) == 0:
+    distance = len(walls)
+    if distance == 0:
         return 0
-    for index in walls:
-        if index == 0 and height > 0:
-            distance += 1
-        if index > 0:
-            wall_height = min(height, index)
-            water_limit += wall_height * distance
-            height = index
-            distance = 0
+    water_limit = 0
+    for index in range(1, distance -1):
+        wall_left = walls[index]
+        for x in range(index):
+            wall_left = max(wall_left, walls[x])
 
+        wall_right = walls[index]
+        for x in range(index + 1, distance):
+            wall_right = max(wall_right, walls[x])
+        water_limit = water_limit + min(wall_left, wall_right) - walls[index]
     return water_limit
