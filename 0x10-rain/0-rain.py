@@ -19,7 +19,7 @@ def rain(walls):
     if distance == 0:
         return 0
     water_limit = 0
-    for index in range(1, distance -1):
+    for index in range(1, distance - 1):
         wall_left = walls[index]
         for x in range(index):
             wall_left = max(wall_left, walls[x])
