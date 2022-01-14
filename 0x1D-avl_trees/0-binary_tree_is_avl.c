@@ -32,7 +32,8 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 	bf = height(tree->left) - height(tree->right);
 	if (bf > 1 || bf < -1)
 		return (0);
-	return ((tree->left == NULL || binary_tree_is_avl(tree->left)) && (tree->right == NULL || binary_tree_is_avl(tree->right)));
+	return ((tree->left == NULL || binary_tree_is_avl(tree->left))
+					&& (tree->right == NULL || binary_tree_is_avl(tree->right)));
 }
 
 /**
@@ -48,7 +49,8 @@ int bst_compare_right(const binary_tree_t *tree, int start_val)
 	if (tree == NULL)
 		return (1);
 	if (tree->n > start_val)
-		return (bst_compare_right(tree->right, start_val) && bst_compare_right(tree->left, start_val));
+		return (bst_compare_right(tree->right, start_val)
+						&& bst_compare_right(tree->left, start_val));
 	return (0);
 }
 
@@ -65,7 +67,8 @@ int bst_compare_left(const binary_tree_t *tree, int start_val)
 	if (tree == NULL)
 		return (1);
 	if (tree->n < start_val)
-		return (bst_compare_left(tree->left, start_val) && bst_compare_left(tree->right, start_val));
+		return (bst_compare_left(tree->left, start_val)
+						&& bst_compare_left(tree->right, start_val));
 	return (0);
 }
 
@@ -79,7 +82,9 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 {
 	if (tree == NULL)
 		return (0);
-	if (bst_compare_left(tree->left, tree->n) && bst_compare_right(tree->right, tree->n))
-		return ((tree->left == NULL || binary_tree_is_bst(tree->left)) && (tree->right == NULL || binary_tree_is_bst(tree->right)));
+	if (bst_compare_left(tree->left, tree->n)
+			&& bst_compare_right(tree->right, tree->n))
+		return ((tree->left == NULL || binary_tree_is_bst(tree->left))
+						&& (tree->right == NULL || binary_tree_is_bst(tree->right)));
 	return (0);
 }
